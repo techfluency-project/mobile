@@ -1,3 +1,4 @@
+import Constants from 'expo-constants';
 import { useRouter } from 'expo-router';
 import React, { useState } from 'react';
 import { StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native';
@@ -48,7 +49,7 @@ const Register = () => {
 
     try {
       // 1. Register the user
-      const registerResponse = await fetch('http://localhost:5092/api/user/sign-up', {
+      const registerResponse = await fetch(`${Constants.expoConfig?.extra?.API_BASE_URL}/api/user/sign-up`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ username, email, password }),
@@ -58,7 +59,7 @@ const Register = () => {
       if (!registerResponse.ok) throw new Error(registerData.message || 'Registration failed');
 
       // 2. Automatically login the user
-      const loginResponse = await fetch('http://localhost:5092/api/user/sign-in', {
+      const loginResponse = await fetch(`${Constants.expoConfig?.extra?.API_BASE_URL}/api/user/sign-in`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ username, password }),
