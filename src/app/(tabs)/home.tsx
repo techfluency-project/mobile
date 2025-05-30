@@ -2,6 +2,7 @@
 import PathActivity from '@/src/components/Path-activity';
 import { colors } from '@/src/styles/colors';
 import { fetchWithAuth } from '@/src/utils/fetch-with-auth';
+import Constants from 'expo-constants';
 import { useRouter } from 'expo-router';
 import React, { useEffect, useState } from 'react';
 import { ScrollView, StyleSheet, Text, View } from 'react-native';
@@ -25,6 +26,9 @@ export default function Home() {
   const router = useRouter();
   const [pathsList, setPathsList] = useState<PathWithActivities[]>([]);
   const [activeId, setActiveId] = useState<string | null>(null);
+  
+  console.log(
+    Constants)
 
   const fetchLearningPaths = async () => {
     try {
@@ -83,7 +87,6 @@ export default function Home() {
           .reverse()
           .map(({ path, activities }) => (
             <View key={path.id} style={styles.pathSection}>
-              {/* Right column: activities stacked bottom-up */}
               <View style={styles.activitiesVertical}>
                 {activities
                   .slice()

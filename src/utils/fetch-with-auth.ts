@@ -1,8 +1,9 @@
 // src/utils/fetch-with-auth.ts
+import Constants from 'expo-constants';
 import { router } from 'expo-router';
 import { deleteToken, getToken } from '../services/token-service';
 
-const API_BASE = 'https://ec04-2804-14d-5492-84df-00-f9f3.ngrok-free.app';
+const API_BASE = Constants.expoConfig?.extra?.API_BASE_URL; 
 
 export async function fetchWithAuth(
   endpoint: string,
@@ -10,12 +11,10 @@ export async function fetchWithAuth(
 ): Promise<Response> {
   const token = await getToken();
 
-  // Build headers with Content-Type, Authorization, and ngrok skip header
   const headers = new Headers({
     'Content-Type': 'application/json',
     'ngrok-skip-browser-warning': '69420',
     ...(token ? { Authorization: `Bearer ${token}` } : {}),
-    // Spread any additional headers passed in options
     ...(options.headers instanceof Headers
       ? Object.fromEntries(options.headers.entries())
       : (options.headers || {})),
@@ -27,9 +26,8 @@ export async function fetchWithAuth(
   });
 
   if (response.status === 401) {
-    // Token is invalid/expired, remove it and redirect to login
     await deleteToken();
-    router.replace('/login'); // Use replace to prevent back navigation
+    router.replace('/login');
   }
 
   return response;

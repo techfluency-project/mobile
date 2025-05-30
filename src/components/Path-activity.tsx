@@ -170,7 +170,12 @@ export default function PathActivity({
             <Text style={styles.tooltipTitle}>
               {splitCamelCase(activityData.name)}
             </Text>
-            <TouchableOpacity style={styles.tooltipButton}>
+            <TouchableOpacity
+              style={styles.tooltipButton}
+              onPress={() => {
+                router.push(`/activity/${id}`);
+              }}
+            >
               <Text style={styles.tooltipButtonText}>
                 {activityData.isCompleted ? 'Review' : 'Start'}
               </Text>
@@ -178,6 +183,7 @@ export default function PathActivity({
           </View>
         </Animated.View>
       )}
+
     </View>
   );
 }

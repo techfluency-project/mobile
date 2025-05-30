@@ -1,3 +1,4 @@
+import Constants from 'expo-constants';
 import { useRouter } from 'expo-router';
 import React, { useEffect, useState } from 'react';
 import { Alert, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native';
@@ -21,7 +22,7 @@ const Login = () => {
 
   const handleLogin = async () => {
     try {
-      const response = await fetch('https://ec04-2804-14d-5492-84df-00-f9f3.ngrok-free.app/api/User/sign-in', {
+      const response = await fetch(`${Constants.expoConfig?.extra?.API_BASE_URL}/api/User/sign-in`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ username, password }),
@@ -31,7 +32,7 @@ const Login = () => {
 
       if (!response.ok) throw new Error(data.message || 'Login failed');
 
-      const token = data.acessToken || data.accessToken || data.token;
+      const token = data.acessToken || data.token;
       if (!token) throw new Error('Token not found in response');
 
       await saveToken(token);

@@ -1,7 +1,7 @@
-import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useRouter } from 'expo-router';
 import { useEffect, useState } from 'react';
 import { ActivityIndicator, View } from 'react-native';
+import { getToken } from '../services/token-service';
 
 export function AuthGuard({ children }: { children: React.ReactNode }) {
   const router = useRouter();
@@ -9,7 +9,9 @@ export function AuthGuard({ children }: { children: React.ReactNode }) {
 
   useEffect(() => {
     const checkToken = async () => {
-      const token = await AsyncStorage.getItem('authToken');
+      
+      const token = await getToken();
+
       if (!token) {
         router.replace('/(auth)/login');
       } else {

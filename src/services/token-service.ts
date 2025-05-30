@@ -1,6 +1,5 @@
-// services/token-service.ts
+import * as SecureStore from 'expo-secure-store'; // ✅ Correct import
 import { Platform } from 'react-native';
-import SecureStore from 'expo-secure-store';
 
 const TOKEN_KEY = 'userToken';
 

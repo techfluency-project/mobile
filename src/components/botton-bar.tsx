@@ -9,9 +9,9 @@ export default function BottomBar() {
 
   // Define the routes and icons
   const tabs = [
-    { name: 'Home', icon: Home, route: '/home' },
-    { name: 'Profile', icon: User, route: '/profile' },
-    { name: 'Flashcards', icon: BookOpen, route: '/flashcards' },
+    { name: 'Profile', icon: User, route: '/(tabs)/profile' },
+    { name: 'Home', icon: Home, route: '/(tabs)/home' },
+    { name: 'Flashcards', icon: BookOpen, route: '/(tabs)/flashcards' },
   ];
 
   return (
@@ -36,6 +36,9 @@ export default function BottomBar() {
 
 const styles = StyleSheet.create({
   container: {
+    position: 'absolute',
+    bottom: 0,
+    width: '100%',
     flexDirection: 'row',
     height: 60,
     borderTopWidth: 1,
