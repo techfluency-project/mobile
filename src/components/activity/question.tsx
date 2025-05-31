@@ -1,8 +1,8 @@
-import React, { useEffect, useState } from 'react';
-import { View, Text, StyleSheet } from 'react-native';
-import QuestionOption from './option';
-import { UserTestDataInterface } from '@/src/types/user-test-data';
 import QuestionInterface from '@/src/types/question';
+import { UserTestDataInterface } from '@/src/types/user-test-data';
+import React, { useEffect, useState } from 'react';
+import { StyleSheet, Text, View } from 'react-native';
+import QuestionOption from './option';
 
 interface QuestionProps {
   userAnswers: UserTestDataInterface[];
@@ -67,14 +67,17 @@ const styles = StyleSheet.create({
   container: {
     width: '100%',
     paddingHorizontal: 20,
-    marginTop: 24,
+    marginTop: 8,
+    flexGrow: 1
   },
   questionText: {
-    fontSize: 22,
+    fontSize: 18,
     fontWeight: 'bold',
     marginBottom: 24,
   },
   optionsContainer: {
-    gap: 16,
+    gap: 4,
+    flexGrow: 1,
+    justifyContent: 'center',
   },
 });
