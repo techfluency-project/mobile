@@ -2,7 +2,7 @@ import Badge from "@/src/components/badge";
 import { deleteToken } from "@/src/services/token-service";
 import { UserProgress } from "@/src/types/user-progress";
 import { fetchWithAuth } from "@/src/utils/fetch-with-auth";
-import { router } from "expo-router";
+import { useRouter } from "expo-router";
 import {
   LogOut,
   Settings,
@@ -35,6 +35,8 @@ const Profile = () => {
   const [userData, setUserData] = useState<UserData | null>(null);
   const [isEditing, setIsEditing] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
+
+  const router = useRouter();
 
   const fetchUserProgress = async () => {
     try {
@@ -71,6 +73,7 @@ const Profile = () => {
       if (res.ok) {
         setIsEditing(false);
         setShowEditModal(false);
+        router.replace('/profile');
       } else {
         console.error("Failed to update profile");
       }

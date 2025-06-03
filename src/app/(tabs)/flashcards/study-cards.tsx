@@ -4,13 +4,12 @@ import { useRouter } from 'expo-router';
 import { Trash2 } from 'lucide-react-native';
 import { useState } from 'react';
 import {
-  Modal,
-  ScrollView,
+  Modal, RefreshControl, ScrollView,
   StyleSheet,
   Text,
   TextInput,
   TouchableOpacity,
-  View,
+  View
 } from 'react-native';
 
 const StudyFlashcards = ({ group }: { group: FlashcardGroup }) => {
@@ -23,7 +22,11 @@ const StudyFlashcards = ({ group }: { group: FlashcardGroup }) => {
   const [frontQuestion, setFrontQuestion] = useState('');
   const [backAnswer, setBackAnswer] = useState('');
 
+  const [refreshing, setRefreshing] = useState(false);
+
   const [isCompleteModalOpen, setIsCompleteModalOpen] = useState(false);
+
+  const router = useRouter();
 
   const startStudying = () => {
     const shuffled = [...group.flashcards].sort(() => Math.random() - 0.5);
@@ -31,6 +34,13 @@ const StudyFlashcards = ({ group }: { group: FlashcardGroup }) => {
     setCurrentIndex(0);
     setShowAnswer(false);
     setIsStudying(true);
+  };
+
+  const onRefresh = async () => {
+    setRefreshing(true);
+    // Replace route to re-trigger loading/fetch logic
+    router.replace(`/flashcards/${group.id}`);
+    setRefreshing(false); // You can delay this slightly if needed
   };
 
   const deleteFlashcard = async (id: string) => {
@@ -58,6 +68,7 @@ const StudyFlashcards = ({ group }: { group: FlashcardGroup }) => {
     setIsAddFlashcardOpen(false);
     setFrontQuestion('');
     setBackAnswer('');
+    router.replace(`/flashcards/${group.id}`);
   };
 
   const handleDifficulty = (difficulty: 'easy' | 'medium' | 'hard') => {
@@ -76,7 +87,12 @@ const StudyFlashcards = ({ group }: { group: FlashcardGroup }) => {
   };
 
   return (
-    <ScrollView contentContainerStyle={styles.container}>
+    <ScrollView 
+      contentContainerStyle={styles.container}
+      refreshControl={
+        <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
+      }
+    >
       <Text style={styles.title}>{group.name}</Text>
 
       {!isStudying ? (
