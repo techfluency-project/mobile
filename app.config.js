@@ -7,6 +7,6 @@ export default ({ config }) => ({
     "expo-secure-store"
   ],
   extra: {
-    API_BASE_URL: "https://techfluency.onrender.com",
+    API_BASE_URL: "http://localhost:5092",
   },
 });
