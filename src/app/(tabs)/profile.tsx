@@ -87,7 +87,7 @@ const Profile = () => {
   const handleLogout = async () => {
     try {
       deleteToken();
-      router.replace('/(auth)/login')
+      router.replace("/(auth)/login");
     } catch (error) {
       console.error("Logout error:", error);
     }
@@ -120,8 +120,12 @@ const Profile = () => {
             <User size={40} color="white" />
           </View>
           <View>
-            <Text style={styles.username}>{userProgress?.username ?? "..."}</Text>
-            <Text style={styles.userHandle}>@{userProgress?.username ?? "..."}</Text>
+            <Text style={styles.username}>
+              {userProgress?.username ?? "..."}
+            </Text>
+            <Text style={styles.userHandle}>
+              @{userProgress?.username ?? "..."}
+            </Text>
           </View>
         </View>
 
@@ -130,11 +134,15 @@ const Profile = () => {
           <View style={styles.statsCard}>
             <View style={styles.levelRow}>
               <Text style={styles.levelLabel}>
-                {userProgress ? getLevelLabel(userProgress.level) : "Loading..."}
+                {userProgress
+                  ? getLevelLabel(userProgress.level)
+                  : "Loading..."}
               </Text>
             </View>
             <View style={styles.xpContainer}>
-              <Text style={styles.xpText}>{userProgress?.totalXP ?? "..."}</Text>
+              <Text style={styles.xpText}>
+                {userProgress?.totalXP ?? "..."}
+              </Text>
               <Text style={styles.xpLabel}>Total XP</Text>
             </View>
           </View>
@@ -148,7 +156,9 @@ const Profile = () => {
                 <Badge key={index} id={badge.id} progress={badge.progress} />
               ))
             ) : (
-              <Text style={styles.noBadgesText}>Looks like you don't have any badges yet.</Text>
+              <Text style={styles.noBadgesText}>
+                Looks like you don't have any badges yet.
+              </Text>
             )}
           </View>
         </View>
@@ -176,10 +186,17 @@ const Profile = () => {
               onPress={() => setShowLogoutModal(true)}
             >
               <View style={styles.configButtonContent}>
-                <View style={[styles.configIconWrapper, { backgroundColor: "#fee2e2" }]}>
+                <View
+                  style={[
+                    styles.configIconWrapper,
+                    { backgroundColor: "#fee2e2" },
+                  ]}
+                >
                   <LogOut size={40} color="#b91c1c" />
                 </View>
-                <Text style={[styles.configButtonText, { color: "#b91c1c" }]}>Log out</Text>
+                <Text style={[styles.configButtonText, { color: "#b91c1c" }]}>
+                  Log out
+                </Text>
               </View>
             </TouchableOpacity>
           </View>
@@ -210,13 +227,17 @@ const Profile = () => {
               {userData &&
                 ["username", "email", "name", "phone"].map((field) => (
                   <View key={field} style={styles.inputGroup}>
-                    <Text style={styles.inputLabel}>{field.charAt(0).toUpperCase() + field.slice(1)}</Text>
+                    <Text style={styles.inputLabel}>
+                      {field.charAt(0).toUpperCase() + field.slice(1)}
+                    </Text>
                     <TextInput
                       style={[styles.input, !isEditing && styles.inputDisabled]}
                       editable={isEditing}
                       value={userData[field]}
                       onChangeText={(text) =>
-                        setUserData((prev) => (prev ? { ...prev, [field]: text } : null))
+                        setUserData((prev) =>
+                          prev ? { ...prev, [field]: text } : null
+                        )
                       }
                     />
                   </View>
@@ -270,7 +291,9 @@ const Profile = () => {
         <View style={styles.modalOverlay}>
           <View style={[styles.modalContent, { maxWidth: 300 }]}>
             <Text style={styles.modalTitle}>Log out</Text>
-            <Text style={styles.logoutMessage}>Are you sure you want to log out?</Text>
+            <Text style={styles.logoutMessage}>
+              Are you sure you want to log out?
+            </Text>
             <View style={styles.modalButtonRow}>
               <TouchableOpacity
                 onPress={() => setShowLogoutModal(false)}
@@ -296,7 +319,7 @@ const styles = StyleSheet.create({
   container: {
     padding: 24,
     paddingBottom: 48,
-    width: '100%',
+    width: "100%",
     alignSelf: "center",
   },
   heading: {
