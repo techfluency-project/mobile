@@ -37,7 +37,7 @@ export default function Home() {
 
       const paths: LearningPath[] = await response.json();
       if (!paths.length) {
-        // router.push('/activity');
+        router.push('/(tabs)/activity');
         return;
       }
 
@@ -124,9 +124,8 @@ const styles = StyleSheet.create({
     backgroundColor: colors.secondary,
   },
   content: {
-    paddingTop: 80,
+    paddingTop: 16,
     paddingHorizontal: 16,
-    paddingBottom: 40,
   },
   pathSection: {
     alignItems: 'center',

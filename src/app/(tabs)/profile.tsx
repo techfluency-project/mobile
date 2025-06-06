@@ -2,14 +2,11 @@ import Badge from "@/src/components/badge";
 import { deleteToken } from "@/src/services/token-service";
 import { UserProgress } from "@/src/types/user-progress";
 import { fetchWithAuth } from "@/src/utils/fetch-with-auth";
-import { router } from "expo-router";
+import { useRouter } from "expo-router";
 import {
   LogOut,
   Settings,
-  User,
-  Wifi,
-  WifiHigh,
-  WifiLow,
+  User
 } from "lucide-react-native";
 import React, { useEffect, useState } from "react";
 import {
@@ -38,6 +35,8 @@ const Profile = () => {
   const [userData, setUserData] = useState<UserData | null>(null);
   const [isEditing, setIsEditing] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
+
+  const router = useRouter();
 
   const fetchUserProgress = async () => {
     try {
@@ -74,6 +73,7 @@ const Profile = () => {
       if (res.ok) {
         setIsEditing(false);
         setShowEditModal(false);
+        router.replace('/profile');
       } else {
         console.error("Failed to update profile");
       }
@@ -110,24 +110,6 @@ const Profile = () => {
     }
   };
 
-  const getLevelIcon = (level: number) => {
-    const iconProps = {
-      size: 40,
-      color: "#2563eb",
-      style: { transform: [{ rotate: "-45deg" }] },
-    };
-    switch (level) {
-      case 0:
-        return <WifiLow {...iconProps} />;
-      case 1:
-        return <WifiHigh {...iconProps} />;
-      case 2:
-        return <Wifi {...iconProps} />;
-      default:
-        return <WifiLow {...iconProps} />;
-    }
-  };
-
   return (
     <>
       <ScrollView contentContainerStyle={styles.container}>
@@ -151,7 +133,6 @@ const Profile = () => {
           <Text style={styles.sectionTitle}>Stats</Text>
           <View style={styles.statsCard}>
             <View style={styles.levelRow}>
-              {userProgress && getLevelIcon(userProgress.level)}
               <Text style={styles.levelLabel}>
                 {userProgress
                   ? getLevelLabel(userProgress.level)
@@ -377,31 +358,32 @@ const styles = StyleSheet.create({
     color: "#1f2937",
   },
   statsCard: {
-    flexDirection: "row",
-    backgroundColor: "#e0f2fe",
+    flexDirection: "column",
+    backgroundColor: "#fff",
     borderRadius: 12,
     padding: 16,
-    alignItems: "center",
+    justifyContent: "center",
     gap: 16,
   },
   levelRow: {
     flexDirection: "row",
     alignItems: "center",
+    justifyContent: "center",
     gap: 12,
   },
   levelLabel: {
-    fontWeight: "600",
-    fontSize: 16,
-    color: "#1e40af", // blue-900
+    fontWeight: "700",
+    fontSize: 24,
+    color: "#1e40af",
   },
   xpContainer: {
-    marginLeft: "auto",
     alignItems: "center",
   },
   xpText: {
     fontWeight: "700",
     fontSize: 24,
     color: "#1e40af",
+    textAlign: "center",
   },
   xpLabel: {
     fontWeight: "600",
@@ -409,17 +391,17 @@ const styles = StyleSheet.create({
     color: "#1e40af",
   },
   badgesContainer: {
-    backgroundColor: "000000",
     flexDirection: "row",
     flexWrap: "wrap",
     gap: 12,
+    backgroundColor: 'fff'
   },
   noBadgesText: {
     fontWeight: "500",
     color: "#6b7280",
   },
   configButton: {
-    backgroundColor: "#dbeafe",
+    backgroundColor: "#fff",
     borderRadius: 12,
     paddingVertical: 12,
     paddingHorizontal: 16,

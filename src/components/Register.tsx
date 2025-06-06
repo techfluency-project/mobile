@@ -66,9 +66,10 @@ const Register = () => {
       });
 
       const loginData = await loginResponse.json();
+      console.log(loginData)
       if (!loginResponse.ok) throw new Error(loginData.message || 'Login failed after registration');
 
-      await saveToken(loginData.token); // Save token to AsyncStorage
+      await saveToken(loginData.acessToken); // Save token to AsyncStorage
       router.replace('/(tabs)/home');   // Go to home screen
     } catch (error) {
       setErrors([(error as Error).message]);

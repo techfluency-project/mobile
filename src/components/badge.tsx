@@ -1,6 +1,7 @@
 import { Medal } from "lucide-react-native";
 import React, { useEffect, useState } from "react";
 import { ActivityIndicator, StyleSheet, Text, View } from "react-native";
+import { fetchWithAuth } from "../utils/fetch-with-auth";
 
 interface BadgeProps {
   id: string;
@@ -25,7 +26,7 @@ export default function Badge({ id, progress }: BadgeProps) {
       try {
         const token = ""; // You should replace this with your token retrieval logic
 
-        const res = await fetch(`http://localhost:5092/api/Badge/GetBadgeById?id=${id}`, {
+        const res = await fetchWithAuth(`/api/Badge/GetBadgeById?id=${id}`, {
           headers: {
             Authorization: `Bearer ${token}`,
             Accept: "application/json",
@@ -100,7 +101,6 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   iconWrapper: {
-    backgroundColor: "#f3f4f6", // Tailwind gray-100
     padding: 16,
     borderRadius: 9999,
     justifyContent: "center",

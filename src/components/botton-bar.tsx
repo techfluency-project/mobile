@@ -11,7 +11,7 @@ export default function BottomBar() {
   const tabs = [
     { name: 'Profile', icon: User, route: '/(tabs)/profile' },
     { name: 'Home', icon: Home, route: '/(tabs)/home' },
-    { name: 'Flashcards', icon: BookOpen, route: '/(tabs)/flashcards' },
+    { name: 'Flashcards', icon: BookOpen, route: '/(tabs)/flashcards/page' },
   ];
 
   return (

@@ -200,9 +200,9 @@ export default function Activity(_: ActivityProps) {
           <Text style={styles.modalText}>
             Would you like to take a short placement test to determine your English level?
           </Text>
-          <View style={{ flexDirection: 'row', marginTop: 20, justifyContent: 'center' }}>
+          <View style={{ flexDirection: 'column', marginTop: 20, gap: 8, justifyContent: 'center' }}>
             <TouchableOpacity
-              style={[styles.button, styles.primaryButton, { marginRight: 10 }]}
+              style={[styles.button, styles.primaryButton]}
               onPress={() => {
                 setShowPlacementPrompt(false);
                 setHasStarted(true);
@@ -234,7 +234,7 @@ export default function Activity(_: ActivityProps) {
     return (
       <View style={styles.modalContainer}>
         <View style={styles.loadingBox}>
-          <Text style={styles.loadingText}>Finalizing your placement...</Text>
+          <Text style={styles.loadingText}>Sending results...</Text>
           <ActivityIndicator size="large" color="#2563EB" style={{ marginTop: 16 }} />
         </View>
       </View>
@@ -252,7 +252,9 @@ export default function Activity(_: ActivityProps) {
   return (
     <View style={styles.container}>
       <View style={styles.progressHeader}>
-        <CloseButton />
+        {!isPlacementMode && (
+          <CloseButton />
+        )}
         <View style={styles.progressBarBackground}>
           <View
             style={[
@@ -284,7 +286,6 @@ const styles = StyleSheet.create({
   progressHeader: {
     flexDirection: 'row',
     alignItems: 'center',
-    marginBottom: 20,
     width: '100%',
   },
   closeButton: {
