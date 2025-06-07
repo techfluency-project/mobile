@@ -3,20 +3,24 @@
 
 ## Começando
 
-### 1. Mude o diretório para a pasta correta
+### 1. Inicie o projeto backend caso o serviço da API já esteja expirado
+
+[Repositório](https://github.com/techfluency-project/techfluency-api) - todas as instruções de como rodar o projeto.
+
+### 2. Mude o diretório para a pasta correta
 
 ```bash
 cd /mobile
 ```
 
-### 2. Instale as dependências
+### 3. Instale as dependências
 
 ```bash
 npm install
 ```
 
 
-### 2. Inicie o app
+### 4. Inicie o app
 
 ```bash
 npx expo start
